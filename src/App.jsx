@@ -2,7 +2,6 @@ import { useState } from "react";
 import { MultiSelectDropdown } from "./componants/MultiSelectDropdown";
 import { TiPlus } from "react-icons/ti";
 
-
 const App = () => {
     const [rows, setRows] = useState([{ singleSelect: "", multiSelect: [] }]);
     const [multiSelectOptions, setMultiSelectOptions] = useState([
@@ -44,12 +43,23 @@ const App = () => {
             alert("Both fields are required before adding a new row.");
             return;
         }
+        const availableOptions = getAvailableSingleSelectOptions(rows.length);
+        if (availableOptions.length === 0) {
+            alert("No option available to select for the next row.");
+            return;
+        }
+
         setRows([...rows, { singleSelect: "", multiSelect: [] }]);
     };
 
     // Get filtered options for single select
-    const getAvailableSingleSelectOptions = () => {
-        return ["Option 1", "Option 2", "Option 3", "Option 4"]
+    const getAvailableSingleSelectOptions = (rowIndex) => {
+        const selectedOptions = rows
+            .filter((_, index) => index !== rowIndex)
+            .map((row) => row.singleSelect);
+        return ["Option 1", "Option 2", "Option 3", "Option 4"].filter(
+            (option) => !selectedOptions.includes(option)
+        );
     };
 
     return (
@@ -75,7 +85,7 @@ const App = () => {
                                     <option value="" disabled>
                                         Select Option
                                     </option>
-                                    {getAvailableSingleSelectOptions().map((option) => (
+                                    {getAvailableSingleSelectOptions(index).map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
