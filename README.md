@@ -19,6 +19,6 @@ Currently, two official plugins are available:
 
 
 ## Features
-- We have to select option in both the label fields.
+- We have to select an option in both the label fields, without it we can not proceed further.
 - If any of the field is not filled among both then We can't add a New Row ,it will show us an alert "both fields are required."
 - In label 2 Section we can add as many options we want to.

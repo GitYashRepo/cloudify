@@ -45,7 +45,7 @@ export const MultiSelectDropdown = ({ options, selectedOptions, onOptionChange, 
                                     handleToggleOption(option);
                                 }}
                             >
-                                ×
+                                x
                             </button>
                         </span>
                     ))
