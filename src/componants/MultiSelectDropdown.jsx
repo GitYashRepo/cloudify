@@ -27,7 +27,6 @@ export const MultiSelectDropdown = ({ options, selectedOptions, onOptionChange, 
 
     return (
         <div className="relative">
-            {/* Input Field */}
             <div
                 className="flex items-center flex-wrap gap-2 p-2 border border-gray-300 rounded cursor-pointer"
                 onClick={() => setIsOpen((prev) => !prev)}

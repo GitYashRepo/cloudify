@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { MultiSelectDropdown } from "./componants/MultiSelectDropdown";
 import { TiPlus } from "react-icons/ti";
@@ -38,22 +37,24 @@ const App = () => {
 
     // Add new row
     const handleAddNewRow = () => {
+        const isCurrentRowValid = rows.every(
+            (row) => row.singleSelect && row.multiSelect.length > 0
+        );
+        if (!isCurrentRowValid) {
+            alert("Both fields are required before adding a new row.");
+            return;
+        }
         setRows([...rows, { singleSelect: "", multiSelect: [] }]);
     };
 
     // Get filtered options for single select
-    const getAvailableSingleSelectOptions = (rowIndex) => {
-        const selectedOptions = rows
-            .filter((_, index) => index !== rowIndex)
-            .map((row) => row.singleSelect);
-        return ["Option 1", "Option 2", "Option 3", "Option 4"].filter(
-            (option) => !selectedOptions.includes(option)
-        );
+    const getAvailableSingleSelectOptions = () => {
+        return ["Option 1", "Option 2", "Option 3", "Option 4"]
     };
 
     return (
-        <div className="container mx-auto p-4">
-            <table className="table-auto w-full border-collapse border border-gray-300">
+        <div className="container w-full m-auto mt-8 bg-white pb-4 border border-gray-600 rounded-lg">
+            <table className="table-auto w-full border-collapse border border-gray-300 p-4">
                 <thead>
                     <tr>
                         <th className="border border-gray-300 px-4 py-2">Label 1</th>
@@ -74,7 +75,7 @@ const App = () => {
                                     <option value="" disabled>
                                         Select Option
                                     </option>
-                                    {getAvailableSingleSelectOptions(index).map((option) => (
+                                    {getAvailableSingleSelectOptions().map((option) => (
                                         <option key={option} value={option}>
                                             {option}
                                         </option>
@@ -82,7 +83,6 @@ const App = () => {
                                 </select>
                             </td>
                             <td className="w-[60%] border border-gray-300 px-4 py-2">
-                                {/* Multi-Select Dropdown Component */}
                                 <MultiSelectDropdown
                                     options={multiSelectOptions}
                                     selectedOptions={row.multiSelect}
@@ -98,7 +98,7 @@ const App = () => {
             </table>
             <div className="w-full flex justify-end">
                 <button
-                    className="mt-4 px-4 py-2 bg-black text-white rounded flex items-center justify-start gap-4"
+                    className="mt-4 px-4 py-2 mr-4 bg-black text-white rounded flex items-center justify-start gap-4"
                     onClick={handleAddNewRow}
                 >
                     <span><TiPlus /></span><span>Add New Row</span>

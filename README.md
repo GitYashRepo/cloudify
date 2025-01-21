@@ -16,3 +16,9 @@ Currently, two official plugins are available:
 - Label 2 - A User can Select multiple option and the selected option will be displayed at the top of input dropdown .
 - In Label 2 section we have already given 4 options but we can add more if we want.
 - after that we have a Add New Row button at the bottom right corner which adds a new row in the table.
+
+
+## Features
+- We have to select option in both the label fields.
+- If any of the field is not filled among both then We can't add a New Row ,it will show us an alert "both fields are required."
+- In label 2 Section we can add as many options we want to.
